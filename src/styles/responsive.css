@@ -36,7 +36,7 @@
     padding: 16px 16px;
   }
   .headline__title{
-    font-size: 28px;;
+    font-size: 28px;
   }
   .headline__description{
     font-size: 16px;
@@ -58,7 +58,7 @@
     padding: 16px 32px 32px 32px;
   }
   .post-item__title{
-    font-size: 18px;
+    font-size: 32px;
   }
   .post-item__description{
     font-size: 14px;
