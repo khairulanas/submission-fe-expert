@@ -258,6 +258,9 @@ main {
 
 .post-item__thumbnail {
     width: 100%;
+    height: 270px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .post-item__date {
@@ -291,6 +294,12 @@ main {
     margin-top: 16px;
     font-size: 14px;
     line-height: 1.5em;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 /*
