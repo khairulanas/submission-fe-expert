@@ -1,3 +1,6 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable indent */
+/* eslint-disable no-unused-expressions */
 import CONFIG from '../../globals/config';
 
 const createRestoDetailTemplate = (resto) => `
@@ -18,18 +21,45 @@ const createRestoDetailTemplate = (resto) => `
 const createMenuItemTemplate = (menus) => `
 <article class="detail-item">
   <div class="detail-item__content">
+  <h2 class="detail-item__title">Menu</h2>
+  <br/><br/>
     <p class="detail-item__date"> 
       <b class="detail-item__date__author">Foods:</b>
-    </p>
-    <div id="foodItem">
-      <p class="detail-item__date">
-      ${menus.foods.map((element) => ` [ ${element.name} ]`)}
-      </P>
-    </div>
+    </p>    
+    <p class="detail-item__date">
+    ${menus.foods.map((element) => ` [ ${element.name} ]`)}
+    </P>
+
+    <br/>
+
+    <p class="detail-item__date"> 
+      <b class="detail-item__date__author">Drinks:</b>
+    </p>    
+    <p class="detail-item__date">
+    ${menus.drinks.map((element) => ` [ ${element.name} ]`)}
+    </P>
   
   </div>
 </article >
   `;
+
+const createReviewTemplate = (reviews) => `
+<article class="detail-item">
+  <div class="detail-item__content">
+  <h2 class="detail-item__title">Reviews</h2>
+  <br/><br/>
+        
+  ${reviews.map((element) =>
+  `
+      <p class="detail-item__date"> 
+      <b class="detail-item__date__author">${element.name}</b> - ${element.date}
+      </p>
+      <p class="post-item__description">${element.review}</p>
+
+    `)} 
+  </div>
+</article >
+`;
 
 const createRestoItemTemplate = (resto) => `
   <article class="post-item" >
@@ -62,4 +92,5 @@ export {
   createLikeButtonTemplate,
   createLikedButtonTemplate,
   createMenuItemTemplate,
+  createReviewTemplate,
 };

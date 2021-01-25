@@ -1,6 +1,6 @@
 import UrlParser from '../../routes/url-parser';
 import RestoDbSource from '../../data/restodb-source';
-import { createRestoDetailTemplate, createMenuItemTemplate } from '../templates/template-creator';
+import { createRestoDetailTemplate, createMenuItemTemplate, createReviewTemplate } from '../templates/template-creator';
 import LikeButtonInitiator from '../../utils/like-button-initiator';
 
 const Detail = {
@@ -9,13 +9,11 @@ const Detail = {
     <section class="content">
       <div class="latest">
         <h1 class="latest__label">Detail Restaurant</h1>
-        <div class="detail">
-            
-        </div>
+        <div class="detail"></div>
         <br/> <br/>
-        <div class="menus">
-            
-        </div>
+        <div class="menus"></div>
+        <br/> <br/>
+        <div class="reviews"></div>
       </div>
     </section>
     <div id="likeButtonContainer"></div>
@@ -27,8 +25,10 @@ const Detail = {
     const resto = await RestoDbSource.detailResto(url.id);
     const restoContainer = document.querySelector('.detail');
     const menusContainer = document.querySelector('.menus');
+    const reviewsContainer = document.querySelector('.reviews');
     restoContainer.innerHTML = createRestoDetailTemplate(resto);
     menusContainer.innerHTML = createMenuItemTemplate(resto.menus);
+    reviewsContainer.innerHTML = createReviewTemplate(resto.customerReviews);
 
     LikeButtonInitiator.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),

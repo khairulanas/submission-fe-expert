@@ -367,6 +367,10 @@ footer a {
     margin: 32px auto auto;
     text-align: left;
 }
+.reviews {
+    margin: 32px auto auto;
+    text-align: left;
+}
 
 .detail-item {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
