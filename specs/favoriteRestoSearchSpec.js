@@ -68,4 +68,39 @@ describe('Searching restos', () => {
       .toEqual('-');
   });
 
+  it('should show the restos found by Favorite Restos', (done) => {
+    document.getElementById('resto-search-container')
+      .addEventListener('restos:searched:updated', () => {
+        expect(document.querySelectorAll('.resto').length).toEqual(3);
+        done();
+      });
+
+    FavoriteRestoIdb.searchRestos.withArgs('film a').and.returnValues([
+      { id: 111, title: 'film abc' },
+      { id: 222, title: 'ada juga film abcde' },
+      { id: 333, title: 'ini juga boleh film a' },
+    ]);
+
+    searchRestos('film a');
+  });
+
+  it('should show the name of the restos found by Favorite Restos', (done) => {
+    document.getElementById('resto-search-container').addEventListener('restos:searched:updated', () => {
+      const restoTitles = document.querySelectorAll('.resto__title');
+      expect(restoTitles.item(0).textContent).toEqual('film abc');
+      expect(restoTitles.item(1).textContent).toEqual('ada juga film abcde');
+      expect(restoTitles.item(2).textContent).toEqual('ini juga boleh film a');
+
+      done();
+    });
+
+    FavoriteRestoIdb.searchRestos.withArgs('film a').and.returnValues([
+      { id: 111, title: 'film abc' },
+      { id: 222, title: 'ada juga film abcde' },
+      { id: 333, title: 'ini juga boleh film a' },
+    ]);
+
+    searchRestos('film a');
+  });
+
 });
