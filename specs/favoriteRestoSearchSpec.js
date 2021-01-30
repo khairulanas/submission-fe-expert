@@ -2,7 +2,15 @@ import FavoriteRestoSearchPresenter from '../src/scripts/views/pages/liked-resto
 import FavoriteRestoIdb from '../src/scripts/data/favorite-resto-idb';
 
 describe('Searching restos', () => {
-  beforeEach(() => {
+  let presenter;
+
+  const searchRestos = (query) => {
+    const queryElement = document.getElementById('query');
+    queryElement.value = query;
+    queryElement.dispatchEvent(new Event('change'));
+  };
+
+  const setRestoSearchContainer = () => {
     document.body.innerHTML = `
         <div id="resto-search-container">
             <input id="query" type="text">
@@ -12,32 +20,52 @@ describe('Searching restos', () => {
             </div>
         </div>
         `;
+  };
+  const constructPresenter = () => {
+    spyOn(FavoriteRestoIdb, 'searchRestos');
+    presenter = new FavoriteRestoSearchPresenter({
+      favoriteRestos: FavoriteRestoIdb,
+    });
+  };
+
+  beforeEach(() => {
+    setRestoSearchContainer();
+    constructPresenter();
   });
 
   it('should be able to capture the query typed by the user', () => {
-    spyOn(FavoriteRestoIdb, 'searchRestos');
-    const presenter = new FavoriteRestoSearchPresenter({
-      favoriteRestos: FavoriteRestoIdb,
-    });
+    searchRestos('resto a');
 
-    const queryElement = document.getElementById('query');
-    queryElement.value = 'film a';
-    queryElement.dispatchEvent(new Event('change'));
-
-    expect(presenter.latestQuery).toEqual('film a');
+    expect(presenter.latestQuery).toEqual('resto a');
   });
 
   // test double; test double
-  it('should ask the model to search for liked movies', () => {
-    spyOn(FavoriteRestoIdb, 'searchRestos');
-    const presenter = new FavoriteRestoSearchPresenter({ favoriteRestos: FavoriteRestoIdb });
-
-    const queryElement = document.getElementById('query');
-    queryElement.value = 'film a';
-    queryElement.dispatchEvent(new Event('change'));
+  it('should ask the model to search for liked restos', () => {
+    searchRestos('resto a');
 
     expect(FavoriteRestoIdb.searchRestos)
-      .toHaveBeenCalledWith('film a');
+      .toHaveBeenCalledWith('resto a');
+  });
+
+  it('should show the found restos', () => {
+    presenter._showFoundRestos([{ id: 1, title: 'Satu' }]);
+    expect(document.querySelectorAll('.resto__title').item(0).textContent)
+      .toEqual('Satu');
+
+    presenter._showFoundRestos(
+      [{ id: 1, title: 'Satu' }, { id: 2, title: 'Dua' }],
+    );
+
+    const restoTitles = document.querySelectorAll('.resto__title');
+    expect(restoTitles.item(0).textContent).toEqual('Satu');
+    expect(restoTitles.item(1).textContent).toEqual('Dua');
+  });
+
+  it('should show - for found resto without title', () => {
+    presenter._showFoundRestos([{ id: 1 }]);
+
+    expect(document.querySelectorAll('.resto__title').item(0).textContent)
+      .toEqual('-');
   });
 
 });
