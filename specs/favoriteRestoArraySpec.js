@@ -34,9 +34,22 @@ const FavoriteRestoArray = {
   },
 
   deleteResto(id) {
-    // cara boros menghapus film dengan meng-copy film yang ada
-    // kecuali film dengan id == id
+    // cara boros menghapus resto dengan meng-copy resto yang ada
+    // kecuali resto dengan id == id
     favoriteRestos = favoriteRestos.filter((resto) => resto.id != id);
+  },
+
+  searchRestos(query) {
+    return this.getAllRestos()
+      .filter((resto) => {
+        const loweredCaseRestoTitle = (resto.title || '-').toLowerCase();
+        const jammedRestoTitle = loweredCaseRestoTitle.replace(/\s/g, '');
+
+        const loweredCaseQuery = query.toLowerCase();
+        const jammedQuery = loweredCaseQuery.replace(/\s/g, '');
+
+        return jammedRestoTitle.indexOf(jammedQuery) !== -1;
+      });
   },
 };
 
