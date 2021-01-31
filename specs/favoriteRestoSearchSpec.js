@@ -128,4 +128,30 @@ describe('Searching restos', () => {
         .toHaveBeenCalled();
     });
   });
+
+  describe('When no favorite restos could be found', () => {
+    it('should show the empty message', (done) => {
+      document.getElementById('resto-search-container')
+        .addEventListener('restos:searched:updated', () => {
+          expect(document.querySelectorAll('.restos__not__found').length)
+            .toEqual(1);
+          done();
+        });
+
+      favoriteRestos.searchRestos.withArgs('resto a').and.returnValues([]);
+
+      searchRestos('resto a');
+    });
+
+    it('should not show any resto', (done) => {
+      document.getElementById('resto-search-container').addEventListener('restos:searched:updated', () => {
+        expect(document.querySelectorAll('.resto').length).toEqual(0);
+        done();
+      });
+
+      favoriteRestos.searchRestos.withArgs('resto a').and.returnValues([]);
+
+      searchRestos('resto a');
+    });
+  });
 });
