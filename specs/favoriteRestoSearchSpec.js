@@ -1,9 +1,11 @@
-import FavoriteRestoSearchPresenter from '../src/scripts/views/pages/liked-resto/favorite-resto-search-presenter'
+import FavoriteRestoSearchPresenter from '../src/scripts/views/pages/liked-restos/favorite-resto-search-presenter'
 import FavoriteRestoIdb from '../src/scripts/data/favorite-resto-idb';
+import FavoriteRestoSearchView from '../src/scripts/views/pages/liked-restos/favorite-resto-search-view';
 
 describe('Searching restos', () => {
   let presenter;
   let favoriteRestos;
+  let view;
 
   const searchRestos = (query) => {
     const queryElement = document.getElementById('query');
@@ -12,20 +14,14 @@ describe('Searching restos', () => {
   };
 
   const setRestoSearchContainer = () => {
-    document.body.innerHTML = `
-        <div id="resto-search-container">
-            <input id="query" type="text">
-            <div class="resto-result-container">
-                <ul class="restos">
-                </ul>
-            </div>
-        </div>
-        `;
+    view = new FavoriteRestoSearchView();
+    document.body.innerHTML = view.getTemplate();
   };
   const constructPresenter = () => {
     favoriteRestos = spyOnAllFunctions(FavoriteRestoIdb);
     presenter = new FavoriteRestoSearchPresenter({
       favoriteRestos,
+      view,
     });
   };
 
@@ -144,10 +140,12 @@ describe('Searching restos', () => {
     });
 
     it('should not show any resto', (done) => {
-      document.getElementById('resto-search-container').addEventListener('restos:searched:updated', () => {
-        expect(document.querySelectorAll('.resto').length).toEqual(0);
-        done();
-      });
+      document.getElementById('resto-search-container')
+        .addEventListener('restos:searched:updated', () => {
+          expect(document.querySelectorAll('.resto').length)
+            .toEqual(0);
+          done();
+        });
 
       favoriteRestos.searchRestos.withArgs('resto a').and.returnValues([]);
 
