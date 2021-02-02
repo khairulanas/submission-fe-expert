@@ -63,13 +63,13 @@ const createReviewTemplate = (reviews) => `
 
 const createRestoItemTemplate = (resto) => `
   <article class="post-item" >
-    <img class="post-item__thumbnail" src="${CONFIG.BASE_IMAGE_URL + resto.pictureId}" alt="foto ${resto.name}">
+    <img class="post-item__thumbnail" src="${CONFIG.BASE_IMAGE_URL + resto.pictureId}" alt="${resto.name || "-"}">
       <div class="post-item__content">
-        <p class="post-item__date">&#9992; ${resto.city} :
-        <b class="post-item__date__author">&#9733; ${resto.rating}</b>
+        <p class="post-item__date">&#9992; ${resto.city || "-"} :
+        <b class="post-item__date__author">&#9733; ${resto.rating || "-"}</b>
         </p>
-        <h1 class="post-item__title"><a href="${`/#/detail/${resto.id}`}">${resto.name}</a></h1>
-        <p class="post-item__description">${resto.description}</p>
+        <h1 class="resto__title post-item__title"><a href="${`/#/detail/${resto.id}`}">${resto.name || "-"}</a></h1>
+        <p class="post-item__description">${resto.description || "-"}</p>
       </div>
   </article>
 `;

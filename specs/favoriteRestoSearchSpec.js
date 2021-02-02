@@ -46,7 +46,7 @@ describe('Searching restos', () => {
     });
 
     it('should show - when the resto returned does not contain a title', (done) => {
-      document.getElementById('resto-search-container').addEventListener('restos:searched:updated', () => {
+      document.getElementById('restos').addEventListener('restos:updated', () => {
         const restoTitles = document.querySelectorAll('.resto__title');
         expect(restoTitles.item(0).textContent).toEqual('-');
 
@@ -88,9 +88,9 @@ describe('Searching restos', () => {
 
   describe('When no favorite restos could be found', () => {
     it('should show the empty message', (done) => {
-      document.getElementById('resto-search-container')
-        .addEventListener('restos:searched:updated', () => {
-          expect(document.querySelectorAll('.restos__not__found').length)
+      document.getElementById('restos')
+        .addEventListener('restos:updated', () => {
+          expect(document.querySelectorAll('.resto-item__not__found').length)
             .toEqual(1);
           done();
         });
@@ -101,9 +101,9 @@ describe('Searching restos', () => {
     });
 
     it('should not show any resto', (done) => {
-      document.getElementById('resto-search-container')
-        .addEventListener('restos:searched:updated', () => {
-          expect(document.querySelectorAll('.resto').length)
+      document.getElementById('restos')
+        .addEventListener('restos:updated', () => {
+          expect(document.querySelectorAll('.post-item').length)
             .toEqual(0);
           done();
         });
