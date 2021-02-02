@@ -3,14 +3,15 @@ import { createRestoItemTemplate } from '../../templates/template-creator';
 class FavoriteRestoSearchView {
   getTemplate() {
     return `
-    <div class="content">
+    <section class="content">
       <input id="query" type="text">
-      <h2 class="content__heading">Your Favorited Resto</h2>
-        <div id="restos" class="restos">
-               
-        </div>
+      <div class="latest">
+          <h1 class="latest__label">Favorite Restaurant</h1>
+          <div id="restos" class="restos posts">
+
+          </div>
       </div>
-    </div>
+    </section>
         `;
   }
 
