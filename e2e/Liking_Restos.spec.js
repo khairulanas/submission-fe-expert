@@ -10,8 +10,16 @@ Scenario('showing empty liked restos', ({ I }) => {
 });
 
 Scenario('liking one resto', ({ I }) => {
-  I.see('Tidak ada film untuk ditampilkan', '.resto-item__not__found');
+  I.see('Tidak ada restoran untuk ditampilkan', '.resto-item__not__found');
 
   I.amOnPage('/');
-  // … kita akan mengisi uji coba berikutnya …
+  // pause();
+  I.seeElement('.resto__title a');
+  I.click(locate('.resto__title a').first());
+
+  I.seeElement('#likeButton');
+  I.click('#likeButton');
+
+  I.amOnPage('/#/favorite');
+  I.seeElement('.post-item');
 });
