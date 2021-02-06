@@ -3,8 +3,9 @@
     "background_color": "#030303",
     "display": "standalone",
     "scope": "/",
-    "start_url": "/index.html",
+    "start_url": "/",
     "app_name": "Mermaid Resto",
+    "name": "Mermaid Resto",
     "short_name": "Mermaid Resto",
     "description": "Hidup Sehat Berawal Dari Makanan Yang Sehat",
     "icons": [

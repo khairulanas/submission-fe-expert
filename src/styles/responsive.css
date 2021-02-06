@@ -47,6 +47,9 @@
   .header__menu{
     display: none;
   }
+  .hero{
+    background-image: url("/images/heros/hero-image_4-large.jpg"); 
+  }
 }
 
 @media screen and (min-width:650px){
