@@ -3,9 +3,12 @@
 /* eslint-disable no-unused-expressions */
 import CONFIG from '../../globals/config';
 
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
 const createRestoDetailTemplate = (resto) => `
 <article class="detail-item">
-    <img class="detail-item__thumbnail" src="${CONFIG.BASE_IMAGE_URL + resto.pictureId}"alt="foto ${resto.name}">
+    <img class="lazyload detail-item__thumbnail" src="${CONFIG.BASE_IMAGE_URL + resto.pictureId}"alt="foto ${resto.name}">
     <div class="detail-item__content">
       <p class="detail-item__date"> 
         <b class="detail-item__date__author">Rating: &#9733; ${resto.rating}</b>
@@ -63,7 +66,7 @@ const createReviewTemplate = (reviews) => `
 
 const createRestoItemTemplate = (resto) => `
   <article class="post-item" >
-    <img class="post-item__thumbnail" src="${CONFIG.BASE_IMAGE_URL + resto.pictureId}" alt="${resto.name || "-"}">
+    <img class="lazyload post-item__thumbnail" src="${CONFIG.BASE_IMAGE_URL + resto.pictureId}" alt="${resto.name || "-"}">
       <div class="post-item__content">
         <p class="post-item__date">&#9992; ${resto.city || "-"} :
         <b class="post-item__date__author">&#9733; ${resto.rating || "-"}</b>
